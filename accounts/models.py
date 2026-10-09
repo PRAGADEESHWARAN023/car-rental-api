@@ -13,10 +13,10 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self,email,password=None,**extra):
-        extra.setfault("is_staff", True)
-        extra.setfault("is_superuser", True)
-        extra.setfault("role", User.Role.ADMIN)
-        return self.create_User(email,password,**extra)
+        extra.setdefault("is_staff", True)
+        extra.setdefault("is_superuser", True)
+        extra.setdefault("role", User.Role.ADMIN)
+        return self.create_user(email,password,**extra)
 
 class User(AbstractUser):
     class Role(models.TextChoices):
@@ -24,7 +24,7 @@ class User(AbstractUser):
         STAFF ="staff", "Staff"
         ADMIN ="admin", "Admin"
 
-    Username=None
+    username =None
     email=models.EmailField(unique=True)
     phone=models.CharField(max_length=20, blank=True)
     role=models.CharField(max_length=10,choices=Role.choices,default=Role.CUSTOMER)
