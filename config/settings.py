@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "accounts",
     "fleet",
+    "django.contrib.postgres",
+    "bookings",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
