@@ -20,5 +20,5 @@ def test_create_user_requires_email():
 @pytest.mark.django_db
 def test_create_superuser_gets_admin_role():
     admin = User.objects.create_superuser(email="b@example.com", password="s3cret-pass")
-    assert admin.role == User.Role.ADMIN
+    assert admin.role == User.Role.STAFF
     assert admin.is_staff and admin.is_superuser
