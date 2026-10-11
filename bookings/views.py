@@ -18,7 +18,7 @@ class BookingViewSet(
     serializer_class = BookingSerializer
 
     def get_queryset(self):
-        bookings = Booking.objects.order_by("-id")
+        bookings = Booking.objects.select_related("car", "user").order_by("-id")
         if is_fleet_staff(self.request.user):
             return bookings
         return bookings.filter(user=self.request.user)
