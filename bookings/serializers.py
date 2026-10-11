@@ -8,7 +8,16 @@ from fleet.models import Car
 from .models import Booking
 
 
+class CarSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = ["id", "registration_number", "make", "model", "daily_price"]
+        read_only_fields = fields
+
+
 class BookingSerializer(serializers.ModelSerializer):
+    car_details = CarSummarySerializer(source="car", read_only=True)
+    customer_email = serializers.EmailField(source="user.email", read_only=True)
     refund_amount = serializers.SerializerMethodField()
 
     class Meta:
@@ -16,6 +25,8 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "car",
+            "car_details",
+            "customer_email",
             "start_date",
             "end_date",
             "total_price",
