@@ -1,5 +1,5 @@
 # car-rental-api
-
+![CI](https://github.com/PRAGADEESHWARAN023/car-rental-api/actions/workflows/ci.yml/badge.svg)
 ## Design decisions
 - Custom user model: We define our custom User model before the first migration, because Django connects the user model to permissions, the admin system, and foreign keys, so switching models later can require rebuilding those relationships and the database.
 - Price validation: We use both a Python validator and a database constraint, because operations such as Car.objects.create() can bypass a validator, while the database constraint protects data integrity.
